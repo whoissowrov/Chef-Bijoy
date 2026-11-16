@@ -3041,7 +3041,7 @@ input, textarea, select {
 
       <!-- Nav Actions (Theme Switcher & Mobile Trigger) -->
       <div class="nav-actions">
-        <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="btn btn-primary" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Download Official Chef Resume PDF">
+        <a href="#cvModal" onclick="openCvModal(event); return false;" class="btn btn-primary" style="padding: 0.55rem 1.15rem; font-size: 0.85rem;" title="Select &amp; Download Chef Resume (PDF)">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 4px;">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -3076,7 +3076,7 @@ input, textarea, select {
       <li><a href="#references" class="nav-link">References</a></li>
       <li><a href="#contact" class="nav-link">Contact / Hire Chef</a></li>
       <li style="margin-top: 1rem;">
-        <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="btn btn-primary" style="width: 100%; text-align: center;">
+        <a href="#cvModal" onclick="openCvModal(event); return false;" class="btn btn-primary" style="width: 100%; text-align: center;">
           Download Resume (PDF)
         </a>
       </li>
@@ -3114,7 +3114,7 @@ input, textarea, select {
               <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="btn btn-outline" id="heroDownloadCvBtn">
+          <a href="#cvModal" onclick="openCvModal(event); return false;" class="btn btn-outline" id="heroDownloadCvBtn">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -3253,7 +3253,7 @@ input, textarea, select {
             </div>
 
             <div class="about-cta" style="display: flex; flex-wrap: wrap; gap: 1rem;">
-              <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="btn btn-primary" id="aboutDownloadCvBtn">
+              <a href="#cvModal" onclick="openCvModal(event); return false;" class="btn btn-primary" id="aboutDownloadCvBtn">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -3548,7 +3548,7 @@ input, textarea, select {
               Download Chef Md. Imran Hasan Bijoy's verified curriculum vitae with full references, institutional certifications, and culinary credentials.
             </p>
           </div>
-          <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="btn btn-primary" style="white-space: nowrap;">
+          <a href="#cvModal" onclick="openCvModal(event); return false;" class="btn btn-primary" style="white-space: nowrap;">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -4121,7 +4121,7 @@ input, textarea, select {
         <a href="tel:+8801624558744" class="social-link" aria-label="Call Chef Bijoy">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </a>
-        <a href="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" download="Md_Imran_Hasan_Bijoy_Chef_CV.pdf" class="social-link" aria-label="Download CV PDF" title="Download CV PDF">
+        <a href="#cvModal" onclick="openCvModal(event); return false;" class="social-link" aria-label="Select &amp; Download CV PDF" title="Select &amp; Download CV PDF">
           <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
         </a>
       </div>
@@ -4384,7 +4384,147 @@ input, textarea, select {
     <span class="cursor-card-badge" id="cursorCardBadge">VIEW</span>
   </div>
 
+  <!-- Dual CV Selection Modal Controller (Embedded for Zero-Latency & Cache-Proof Execution) -->
+  <script>
+    (function() {
+      var cvModal = document.getElementById('cvModal');
+      var cvCardExecutive = document.getElementById('cvCardExecutive');
+      var cvCardClassic = document.getElementById('cvCardClassic');
+      var cvModalDownloadBtn = document.getElementById('cvModalDownloadBtn');
+      var cvModalDownloadBtnText = document.getElementById('cvModalDownloadBtnText');
+      var cvFooterSelectionText = document.getElementById('cvFooterSelectionText');
+      var cvFooterSelectionSub = document.getElementById('cvFooterSelectionSub');
+
+      var cvData = {
+        executive: {
+          title: 'Executive 2-Page CV (Recommended)',
+          file: 'Md_Imran_Hasan_Bijoy_Executive_CV.pdf',
+          sub: 'File: Md_Imran_Hasan_Bijoy_Executive_CV.pdf (552 KB)',
+          btnText: 'Download Executive 2-Page CV (PDF)'
+        },
+        classic: {
+          title: 'Original 3-Page Full CV',
+          file: 'Md_Imran_Hasan_Bijoy_Classic_CV.pdf',
+          sub: 'File: Md_Imran_Hasan_Bijoy_Classic_CV.pdf (1.62 MB)',
+          btnText: 'Download Classic 3-Page CV (PDF)'
+        }
+      };
+
+      var selectedKey = 'executive';
+
+      window.selectCvOption = function(key) {
+        selectedKey = key;
+        if (key === 'executive') {
+          if (cvCardExecutive) {
+            cvCardExecutive.classList.add('active');
+            cvCardExecutive.setAttribute('aria-checked', 'true');
+            var stat = cvCardExecutive.querySelector('.cv-card-status');
+            if (stat) stat.textContent = 'Selected';
+          }
+          if (cvCardClassic) {
+            cvCardClassic.classList.remove('active');
+            cvCardClassic.setAttribute('aria-checked', 'false');
+            var stat = cvCardClassic.querySelector('.cv-card-status');
+            if (stat) stat.textContent = 'Select this format';
+          }
+        } else {
+          if (cvCardClassic) {
+            cvCardClassic.classList.add('active');
+            cvCardClassic.setAttribute('aria-checked', 'true');
+            var stat = cvCardClassic.querySelector('.cv-card-status');
+            if (stat) stat.textContent = 'Selected';
+          }
+          if (cvCardExecutive) {
+            cvCardExecutive.classList.remove('active');
+            cvCardExecutive.setAttribute('aria-checked', 'false');
+            var stat = cvCardExecutive.querySelector('.cv-card-status');
+            if (stat) stat.textContent = 'Select this format';
+          }
+        }
+
+        var item = cvData[key];
+        if (item && cvModalDownloadBtn) {
+          cvModalDownloadBtn.href = item.file;
+          cvModalDownloadBtn.setAttribute('download', item.file);
+          if (cvModalDownloadBtnText) cvModalDownloadBtnText.textContent = item.btnText;
+          if (cvFooterSelectionText) {
+            cvFooterSelectionText.innerHTML = 'Selected: <strong>' + item.title + '</strong>';
+          }
+          if (cvFooterSelectionSub) {
+            cvFooterSelectionSub.textContent = item.sub;
+          }
+        }
+      };
+
+      window.openCvModal = function(e) {
+        if (e && typeof e.preventDefault === 'function') e.preventDefault();
+        var modal = document.getElementById('cvModal');
+        if (modal) {
+          if (typeof modal.showModal === 'function') {
+            modal.showModal();
+          } else {
+            modal.setAttribute('open', '');
+          }
+        }
+        return false;
+      };
+
+      window.closeCvModal = function() {
+        var modal = document.getElementById('cvModal');
+        if (modal) {
+          if (typeof modal.close === 'function') {
+            modal.close();
+          } else {
+            modal.removeAttribute('open');
+          }
+        }
+      };
+
+      if (cvCardExecutive) {
+        cvCardExecutive.addEventListener('click', function() { window.selectCvOption('executive'); });
+      }
+      if (cvCardClassic) {
+        cvCardClassic.addEventListener('click', function() { window.selectCvOption('classic'); });
+      }
+
+      var closeBtn = document.getElementById('cvModalCloseBtn');
+      var cancelBtn = document.getElementById('cvModalCancelBtn');
+      if (closeBtn) closeBtn.addEventListener('click', window.closeCvModal);
+      if (cancelBtn) cancelBtn.addEventListener('click', window.closeCvModal);
+
+      if (cvModal) {
+        cvModal.addEventListener('click', function(e) {
+          var rect = cvModal.getBoundingClientRect();
+          var isInDialog = (
+            rect.top <= e.clientY &&
+            e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX &&
+            e.clientX <= rect.left + rect.width
+          );
+          if (!isInDialog) {
+            window.closeCvModal();
+          }
+        });
+      }
+
+      if (cvModalDownloadBtn) {
+        cvModalDownloadBtn.addEventListener('click', function() {
+          var toast = document.getElementById('toastNotice');
+          if (toast) {
+            var txt = toast.querySelector('.toast-text');
+            if (txt) txt.textContent = 'Downloading ' + cvData[selectedKey].title + '...';
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); }, 3500);
+          }
+          setTimeout(function() {
+            window.closeCvModal();
+          }, 600);
+        });
+      }
+    })();
+  </script>
+
   <!-- JavaScript -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2.2"></script>
 </body>
 </html>
