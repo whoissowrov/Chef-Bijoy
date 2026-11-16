@@ -2538,4 +2538,391 @@ input, textarea, select {
   max-width: 600px;
 }
 
+/* ==========================================================================
+   DUAL CV SELECTION MODAL SYSTEM
+   - Shows two CV options (Executive 2-Page & Classic 3-Page)
+   - Exactly ONE primary download button at bottom
+   - Modern, high-touch culinary aesthetic matching 5-star portfolio
+   ========================================================================== */
+
+.cv-dialog:modal {
+  max-width: 940px;
+  width: 94vw;
+  border-radius: var(--radius-lg, 16px);
+  background: var(--bg-secondary, #121214);
+  border: 1px solid var(--border-medium, rgba(255, 255, 255, 0.14));
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15);
 }
+
+.cv-modal-content {
+  padding: 2rem 2.25rem;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .cv-modal-content {
+    padding: 1.25rem 1rem;
+  }
+}
+
+.cv-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.cv-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-color, #d4af37);
+  background: rgba(212, 175, 55, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.cv-modal-title {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary, #f5f5f7);
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 640px) {
+  .cv-modal-title {
+    font-size: 1.35rem;
+  }
+}
+
+.cv-modal-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-secondary, #a0a0ab);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.cv-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .cv-selection-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.cv-card {
+  position: relative;
+  background: var(--bg-card, rgba(22, 22, 26, 0.75));
+  border: 2px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 1.35rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  outline: none;
+  user-select: none;
+}
+
+.cv-card:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  transform: translateY(-2px);
+  background: var(--bg-card-hover, rgba(30, 30, 36, 0.95));
+}
+
+.cv-card:focus-visible {
+  outline: 2px solid var(--accent-color, #d4af37);
+  outline-offset: 2px;
+}
+
+.cv-card.active {
+  border-color: var(--accent-color, #d4af37);
+  background: rgba(212, 175, 55, 0.05);
+  box-shadow: 0 0 0 1px var(--accent-color, #d4af37), 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.cv-card-indicator {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-medium, rgba(255, 255, 255, 0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.cv-card.active .cv-card-indicator {
+  border-color: var(--accent-color, #d4af37);
+  background: var(--accent-color, #d4af37);
+}
+
+.cv-card-indicator .cv-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.cv-card.active .cv-card-indicator .cv-radio-dot {
+  background: #0a0a0b;
+}
+
+.cv-card-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding-right: 2.25rem;
+}
+
+.cv-pill {
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.cv-pill-gold {
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--accent-color, #d4af37);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.cv-pill-silver {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cv-pill-dark {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text-secondary, #a0a0ab);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.cv-card-preview-wrap {
+  position: relative;
+  height: 175px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  background: #0e0e12;
+  margin-bottom: 0.95rem;
+}
+
+.cv-card-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.3s ease;
+}
+
+.cv-card:hover .cv-card-preview-img {
+  transform: scale(1.02);
+}
+
+.cv-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.65rem;
+}
+
+.cv-preview-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cv-preview-link:hover {
+  background: var(--accent-color, #d4af37);
+  color: #0a0a0b;
+  border-color: var(--accent-color, #d4af37);
+}
+
+.cv-card-info {
+  margin-bottom: 0.85rem;
+}
+
+.cv-card-title {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #f5f5f7);
+  margin-bottom: 0.25rem;
+}
+
+.cv-card.active .cv-card-title {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card-meta {
+  font-size: 0.82rem;
+  color: var(--text-secondary, #a0a0ab);
+  margin-bottom: 0.85rem;
+}
+
+.cv-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cv-card-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary, #a0a0ab);
+  line-height: 1.35;
+}
+
+.cv-card-features li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card-features li strong {
+  color: var(--text-primary, #f5f5f7);
+}
+
+.cv-card-select-label {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-subtle, rgba(255, 255, 255, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cv-card-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted, #656573);
+  transition: color 0.2s ease;
+}
+
+.cv-card.active .cv-card-status {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card.active .cv-card-status::before {
+  content: '✓ ';
+}
+
+.cv-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+}
+
+@media (max-width: 640px) {
+  .cv-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cv-modal-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .cv-modal-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.cv-modal-footer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cv-file-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.cv-footer-selection-text {
+  font-size: 0.92rem;
+  color: var(--text-primary, #f5f5f7);
+}
+
+.cv-footer-selection-text strong {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-footer-selection-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary, #a0a0ab);
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+}
+
+.cv-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cv-modal-download-btn {
+  padding: 0.75rem 1.85rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 18px var(--accent-glow, rgba(212, 175, 55, 0.35));
+}
+

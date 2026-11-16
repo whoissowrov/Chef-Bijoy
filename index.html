@@ -2611,7 +2611,394 @@ input, textarea, select {
   max-width: 600px;
 }
 
+/* ==========================================================================
+   DUAL CV SELECTION MODAL SYSTEM
+   - Shows two CV options (Executive 2-Page & Classic 3-Page)
+   - Exactly ONE primary download button at bottom
+   - Modern, high-touch culinary aesthetic matching 5-star portfolio
+   ========================================================================== */
+
+.cv-dialog:modal {
+  max-width: 940px;
+  width: 94vw;
+  border-radius: var(--radius-lg, 16px);
+  background: var(--bg-secondary, #121214);
+  border: 1px solid var(--border-medium, rgba(255, 255, 255, 0.14));
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15);
 }
+
+.cv-modal-content {
+  padding: 2rem 2.25rem;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .cv-modal-content {
+    padding: 1.25rem 1rem;
+  }
+}
+
+.cv-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.cv-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-color, #d4af37);
+  background: rgba(212, 175, 55, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.cv-modal-title {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary, #f5f5f7);
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 640px) {
+  .cv-modal-title {
+    font-size: 1.35rem;
+  }
+}
+
+.cv-modal-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-secondary, #a0a0ab);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.cv-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .cv-selection-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.cv-card {
+  position: relative;
+  background: var(--bg-card, rgba(22, 22, 26, 0.75));
+  border: 2px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 1.35rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  outline: none;
+  user-select: none;
+}
+
+.cv-card:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  transform: translateY(-2px);
+  background: var(--bg-card-hover, rgba(30, 30, 36, 0.95));
+}
+
+.cv-card:focus-visible {
+  outline: 2px solid var(--accent-color, #d4af37);
+  outline-offset: 2px;
+}
+
+.cv-card.active {
+  border-color: var(--accent-color, #d4af37);
+  background: rgba(212, 175, 55, 0.05);
+  box-shadow: 0 0 0 1px var(--accent-color, #d4af37), 0 12px 30px rgba(212, 175, 55, 0.15);
+}
+
+.cv-card-indicator {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-medium, rgba(255, 255, 255, 0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.cv-card.active .cv-card-indicator {
+  border-color: var(--accent-color, #d4af37);
+  background: var(--accent-color, #d4af37);
+}
+
+.cv-card-indicator .cv-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.cv-card.active .cv-card-indicator .cv-radio-dot {
+  background: #0a0a0b;
+}
+
+.cv-card-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding-right: 2.25rem;
+}
+
+.cv-pill {
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.cv-pill-gold {
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--accent-color, #d4af37);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.cv-pill-silver {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cv-pill-dark {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text-secondary, #a0a0ab);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.cv-card-preview-wrap {
+  position: relative;
+  height: 175px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+  background: #0e0e12;
+  margin-bottom: 0.95rem;
+}
+
+.cv-card-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.3s ease;
+}
+
+.cv-card:hover .cv-card-preview-img {
+  transform: scale(1.02);
+}
+
+.cv-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.65rem;
+}
+
+.cv-preview-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cv-preview-link:hover {
+  background: var(--accent-color, #d4af37);
+  color: #0a0a0b;
+  border-color: var(--accent-color, #d4af37);
+}
+
+.cv-card-info {
+  margin-bottom: 0.85rem;
+}
+
+.cv-card-title {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #f5f5f7);
+  margin-bottom: 0.25rem;
+}
+
+.cv-card.active .cv-card-title {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card-meta {
+  font-size: 0.82rem;
+  color: var(--text-secondary, #a0a0ab);
+  margin-bottom: 0.85rem;
+}
+
+.cv-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cv-card-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary, #a0a0ab);
+  line-height: 1.35;
+}
+
+.cv-card-features li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card-features li strong {
+  color: var(--text-primary, #f5f5f7);
+}
+
+.cv-card-select-label {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-subtle, rgba(255, 255, 255, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cv-card-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted, #656573);
+  transition: color 0.2s ease;
+}
+
+.cv-card.active .cv-card-status {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-card.active .cv-card-status::before {
+  content: '✓ ';
+}
+
+.cv-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+}
+
+@media (max-width: 640px) {
+  .cv-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cv-modal-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .cv-modal-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.cv-modal-footer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cv-file-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.cv-footer-selection-text {
+  font-size: 0.92rem;
+  color: var(--text-primary, #f5f5f7);
+}
+
+.cv-footer-selection-text strong {
+  color: var(--accent-color, #d4af37);
+}
+
+.cv-footer-selection-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary, #a0a0ab);
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+}
+
+.cv-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cv-modal-download-btn {
+  padding: 0.75rem 1.85rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 18px var(--accent-glow, rgba(212, 175, 55, 0.35));
+}
+
 
   </style>
 
@@ -3787,6 +4174,155 @@ input, textarea, select {
           <a href="#contact" class="btn btn-primary" onclick="document.getElementById('projectModal').close();">
             Inquire About Similar Service / Recruitment
           </a>
+        </div>
+
+      </div>
+
+    </div>
+  </dialog>
+
+  <!-- DUAL CV SELECTION MODAL DIALOG (<dialog> Native API) -->
+  <dialog id="cvModal" aria-labelledby="cvModalTitle" class="cv-dialog">
+    <div class="dialog-content cv-modal-content">
+      
+      <div class="cv-modal-header">
+        <div class="cv-modal-header-text">
+          <div class="cv-modal-badge">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Official Chef Dossier &amp; Credentials
+          </div>
+          <h2 class="cv-modal-title" id="cvModalTitle">Select Curriculum Vitae Format</h2>
+          <p class="cv-modal-subtitle">Choose your preferred CV version below. Click on a card to select, then download with one click.</p>
+        </div>
+        <button class="dialog-close-btn" id="cvModalCloseBtn" type="button" aria-label="Close CV dialog">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="cv-modal-body">
+        
+        <!-- Two selectable CV Cards Grid -->
+        <div class="cv-selection-grid" role="radiogroup" aria-label="Curriculum Vitae Version Selection">
+          
+          <!-- Option 1: Executive 2-Page CV (Selected by Default) -->
+          <div class="cv-card active" id="cvCardExecutive" data-cv="executive" role="radio" aria-checked="true" tabindex="0">
+            <div class="cv-card-indicator" aria-hidden="true">
+              <span class="cv-radio-dot"></span>
+            </div>
+            
+            <div class="cv-card-badge-row">
+              <span class="cv-pill cv-pill-gold">★ RECOMMENDED</span>
+              <span class="cv-pill cv-pill-dark">2 PAGES</span>
+            </div>
+
+            <div class="cv-card-preview-wrap">
+              <img src="images/cv_preview.png" alt="Executive 2-Page CV Preview" class="cv-card-preview-img" loading="lazy">
+              <div class="cv-preview-overlay">
+                <a href="cv.html" target="_blank" rel="noopener noreferrer" class="cv-preview-link" onclick="event.stopPropagation();">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  Preview Online
+                </a>
+              </div>
+            </div>
+
+            <div class="cv-card-info">
+              <h3 class="cv-card-title">Executive 2-Page CV</h3>
+              <p class="cv-card-meta">Modern 5-Star Format • Compact &amp; High-Impact</p>
+              
+              <ul class="cv-card-features">
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Concise 2 Pages:</strong> Tailored for Hotel GMs, Executive Chefs &amp; Overseas Recruiters</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Key Career Milestones:</strong> Radisson Blu + Bhawal Resort track record highlighted</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Clean Typography:</strong> Modern accents, NSDA Level 3 Baking certification</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="cv-card-select-label">
+              <span class="cv-card-status">Selected</span>
+            </div>
+          </div>
+
+          <!-- Option 2: Original 3-Page Full CV -->
+          <div class="cv-card" id="cvCardClassic" data-cv="classic" role="radio" aria-checked="false" tabindex="0">
+            <div class="cv-card-indicator" aria-hidden="true">
+              <span class="cv-radio-dot"></span>
+            </div>
+            
+            <div class="cv-card-badge-row">
+              <span class="cv-pill cv-pill-silver">ORIGINAL ARCHIVE</span>
+              <span class="cv-pill cv-pill-dark">3 PAGES</span>
+            </div>
+
+            <div class="cv-card-preview-wrap">
+              <img src="images/cv_classic_thumb.png" alt="Classic 3-Page CV Preview" class="cv-card-preview-img" loading="lazy">
+              <div class="cv-preview-overlay">
+                <a href="Md_Imran_Hasan_Bijoy_Classic_CV.pdf" target="_blank" rel="noopener noreferrer" class="cv-preview-link" onclick="event.stopPropagation();">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  Preview PDF
+                </a>
+              </div>
+            </div>
+
+            <div class="cv-card-info">
+              <h3 class="cv-card-title">Original 3-Page Full CV</h3>
+              <p class="cv-card-meta">Classic Formal Dossier • Full Historical Breakdown</p>
+              
+              <ul class="cv-card-features">
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Full 3 Pages:</strong> Complete personal dossier with expanded duties and daily kitchen tasks</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Original Layout:</strong> The authentic blue/grey header design as submitted</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  <span><strong>Deep Detail:</strong> Extensive dish lists, section procedures &amp; reference contacts</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="cv-card-select-label">
+              <span class="cv-card-status">Select this format</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Single Download Button Section (Exactly ONE button as requested!) -->
+        <div class="cv-modal-footer">
+          <div class="cv-modal-footer-info">
+            <span class="cv-file-icon">📄</span>
+            <div>
+              <div class="cv-footer-selection-text" id="cvFooterSelectionText">Selected: <strong>Executive 2-Page CV (Recommended)</strong></div>
+              <small class="cv-footer-selection-sub" id="cvFooterSelectionSub">File: Md_Imran_Hasan_Bijoy_Executive_CV.pdf (552 KB)</small>
+            </div>
+          </div>
+          
+          <div class="cv-modal-actions">
+            <button type="button" class="btn btn-outline" id="cvModalCancelBtn">Cancel</button>
+            <a id="cvModalDownloadBtn" 
+               href="Md_Imran_Hasan_Bijoy_Executive_CV.pdf" 
+               download="Md_Imran_Hasan_Bijoy_Executive_CV.pdf" 
+               class="btn btn-primary cv-modal-download-btn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span id="cvModalDownloadBtnText">Download Selected CV (PDF)</span>
+            </a>
+          </div>
         </div>
 
       </div>

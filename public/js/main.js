@@ -263,6 +263,161 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 5b. Dual CV Download Modal Handling (<dialog> Native API)
+  const cvModal = document.getElementById('cvModal');
+  const cvModalCloseBtn = document.getElementById('cvModalCloseBtn');
+  const cvModalCancelBtn = document.getElementById('cvModalCancelBtn');
+  const cvCardExecutive = document.getElementById('cvCardExecutive');
+  const cvCardClassic = document.getElementById('cvCardClassic');
+  const cvModalDownloadBtn = document.getElementById('cvModalDownloadBtn');
+  const cvModalDownloadBtnText = document.getElementById('cvModalDownloadBtnText');
+  const cvFooterSelectionText = document.getElementById('cvFooterSelectionText');
+  const cvFooterSelectionSub = document.getElementById('cvFooterSelectionSub');
+
+  const cvData = {
+    executive: {
+      title: 'Executive 2-Page CV (Recommended)',
+      file: 'Md_Imran_Hasan_Bijoy_Executive_CV.pdf',
+      sub: 'File: Md_Imran_Hasan_Bijoy_Executive_CV.pdf (552 KB)',
+      btnText: 'Download Executive 2-Page CV (PDF)'
+    },
+    classic: {
+      title: 'Original 3-Page Full CV',
+      file: 'Md_Imran_Hasan_Bijoy_Classic_CV.pdf',
+      sub: 'File: Md_Imran_Hasan_Bijoy_Classic_CV.pdf (1.62 MB)',
+      btnText: 'Download Classic 3-Page CV (PDF)'
+    }
+  };
+
+  let selectedCvKey = 'executive';
+
+  const selectCvOption = (key) => {
+    selectedCvKey = key;
+    if (key === 'executive') {
+      if (cvCardExecutive) {
+        cvCardExecutive.classList.add('active');
+        cvCardExecutive.setAttribute('aria-checked', 'true');
+        const stat = cvCardExecutive.querySelector('.cv-card-status');
+        if (stat) stat.textContent = 'Selected';
+      }
+      if (cvCardClassic) {
+        cvCardClassic.classList.remove('active');
+        cvCardClassic.setAttribute('aria-checked', 'false');
+        const stat = cvCardClassic.querySelector('.cv-card-status');
+        if (stat) stat.textContent = 'Select this format';
+      }
+    } else {
+      if (cvCardClassic) {
+        cvCardClassic.classList.add('active');
+        cvCardClassic.setAttribute('aria-checked', 'true');
+        const stat = cvCardClassic.querySelector('.cv-card-status');
+        if (stat) stat.textContent = 'Selected';
+      }
+      if (cvCardExecutive) {
+        cvCardExecutive.classList.remove('active');
+        cvCardExecutive.setAttribute('aria-checked', 'false');
+        const stat = cvCardExecutive.querySelector('.cv-card-status');
+        if (stat) stat.textContent = 'Select this format';
+      }
+    }
+
+    const info = cvData[key];
+    if (info && cvModalDownloadBtn) {
+      cvModalDownloadBtn.href = info.file;
+      cvModalDownloadBtn.setAttribute('download', info.file);
+      if (cvModalDownloadBtnText) cvModalDownloadBtnText.textContent = info.btnText;
+      if (cvFooterSelectionText) {
+        cvFooterSelectionText.innerHTML = `Selected: <strong>${info.title}</strong>`;
+      }
+      if (cvFooterSelectionSub) {
+        cvFooterSelectionSub.textContent = info.sub;
+      }
+    }
+  };
+
+  if (cvCardExecutive) {
+    cvCardExecutive.addEventListener('click', () => selectCvOption('executive'));
+    cvCardExecutive.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectCvOption('executive');
+      }
+    });
+  }
+
+  if (cvCardClassic) {
+    cvCardClassic.addEventListener('click', () => selectCvOption('classic'));
+    cvCardClassic.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectCvOption('classic');
+      }
+    });
+  }
+
+  const openCvModal = (e) => {
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
+    if (cvModal && typeof cvModal.showModal === 'function') {
+      cvModal.showModal();
+    }
+  };
+
+  const closeCvModal = () => {
+    if (cvModal && typeof cvModal.close === 'function') {
+      cvModal.close();
+    }
+  };
+
+  if (cvModalCloseBtn) cvModalCloseBtn.addEventListener('click', closeCvModal);
+  if (cvModalCancelBtn) cvModalCancelBtn.addEventListener('click', closeCvModal);
+
+  // Close CV dialog on clicking outside dialog-content (backdrop click)
+  if (cvModal) {
+    cvModal.addEventListener('click', (e) => {
+      const rect = cvModal.getBoundingClientRect();
+      const isInDialog = (
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width
+      );
+      if (!isInDialog) {
+        closeCvModal();
+      }
+    });
+  }
+
+  // Single Download Button inside modal: initiates download and smoothly closes modal
+  if (cvModalDownloadBtn) {
+    cvModalDownloadBtn.addEventListener('click', () => {
+      const toastNoticeEl = document.getElementById('toastNotice');
+      if (toastNoticeEl) {
+        const txt = toastNoticeEl.querySelector('.toast-text');
+        if (txt) txt.textContent = `Downloading ${cvData[selectedCvKey].title}...`;
+        toastNoticeEl.classList.add('show');
+        setTimeout(() => toastNoticeEl.classList.remove('show'), 3500);
+      }
+      setTimeout(() => {
+        closeCvModal();
+      }, 500);
+    });
+  }
+
+  // Bind all CV download links across the website to open this modal
+  const cvTriggers = document.querySelectorAll(
+    'a[download*="CV.pdf"], a[href*="CV.pdf"], #heroDownloadCvBtn, #aboutDownloadCvBtn, .cv-modal-trigger'
+  );
+  cvTriggers.forEach(btn => {
+    // Exclude the download button and preview links inside the modal itself
+    if (!btn.closest('#cvModal')) {
+      btn.addEventListener('click', (e) => {
+        openCvModal(e);
+      });
+    }
+  });
+
   // 6. Animated Skills Counters on Scroll
   const skillCircles = document.querySelectorAll('.skill-circle-bar');
   const skillNumbers = document.querySelectorAll('.skill-number');
