@@ -18,10 +18,11 @@
   --text-secondary: #a0a0ab;
   --text-muted: #656573;
   
-  --accent-color: #e23e57;
-  --accent-glow: rgba(226, 62, 87, 0.35);
-  --accent-hover: #f04862;
+  --accent-color: #d4af37;
+  --accent-glow: rgba(212, 175, 55, 0.35);
+  --accent-hover: #e6c35c;
   --gold-accent: #d4af37;
+  --copper-accent: #e07a5f;
   
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.16);
@@ -60,10 +61,11 @@
   --text-secondary: #585868;
   --text-muted: #8c8c9e;
   
-  --accent-color: #d6304a;
-  --accent-glow: rgba(214, 48, 74, 0.25);
-  --accent-hover: #bf253e;
+  --accent-color: #b8860b;
+  --accent-glow: rgba(184, 134, 11, 0.25);
+  --accent-hover: #996515;
   --gold-accent: #b8860b;
+  --copper-accent: #c45d3e;
   
   --border-subtle: rgba(0, 0, 0, 0.08);
   --border-medium: rgba(0, 0, 0, 0.16);
@@ -567,45 +569,122 @@ button, input, textarea {
 
 
 
-/* Buttons */
+/* ==========================================================================
+   MINIMALIST CLEAN BUTTONS (APPLE / VERCEL STYLE)
+   ========================================================================== */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   padding: 0.85rem 2rem;
   border-radius: var(--radius-pill);
-  font-size: 0.95rem;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  text-transform: none;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  position: relative;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  user-select: none;
 }
 
+/* Primary Button: Pure Solid White (Dark Theme) / Obsidian (Light Theme) */
 .btn-primary {
-  background: var(--accent-color);
-  color: #ffffff;
-  box-shadow: 0 4px 18px var(--accent-glow);
+  background: #ffffff;
+  color: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 
+              0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
+  background: #eaeaea;
+  color: #000000 !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--accent-glow);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2), 
+              0 3px 8px rgba(0, 0, 0, 0.4);
 }
 
+.btn-primary:active {
+  transform: translateY(0);
+  background: #d8d8dd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .btn-primary {
+  background: #111116;
+  color: #ffffff !important;
+  border: 1px solid #111116;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background: #23232c;
+  color: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Outline Button: Sleek Minimalist Glass */
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--border-medium);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f5f5f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-outline:hover {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-  background: rgba(226, 62, 87, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] .btn-outline {
+  color: #111116;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .btn-outline:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* WhatsApp Minimal Pill Button */
+.btn-whatsapp {
+  background: rgba(37, 211, 102, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  color: #25d366 !important;
+  box-shadow: 0 2px 10px rgba(37, 211, 102, 0.15);
+}
+
+.btn-whatsapp:hover {
+  background: #25d366;
+  border-color: #25d366;
+  color: #05260f !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:active {
+  transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -622,27 +701,55 @@ button, input, textarea {
 }
 
 .filter-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  padding: 0.55rem 1.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #a0a0ab;
+  padding: 0.6rem 1.45rem;
   border-radius: var(--radius-pill);
+  font-family: var(--font-main);
   font-size: 0.88rem;
   font-weight: 500;
+  letter-spacing: -0.01em;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .filter-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--border-medium);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-1px);
 }
 
 .filter-btn.active {
-  background: var(--accent-color);
-  color: #ffffff;
-  border-color: var(--accent-color);
-  box-shadow: 0 4px 14px var(--accent-glow);
+  background: #ffffff;
+  color: #000000 !important;
+  font-weight: 600;
+  border: 1px solid #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .filter-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #585868;
+}
+
+[data-theme="light"] .filter-btn:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .filter-btn.active {
+  background: #111116;
+  color: #ffffff !important;
+  border-color: #111116;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
 }
 
 /* Portfolio Grid */
@@ -766,53 +873,80 @@ button, input, textarea {
 }
 
 /* ==========================================================================
-   CLIENT BRANDS TICKER
+   HOTEL BRANDS & CREDENTIALS INFINITE MARQUEE TICKER (RIGHT TO LEFT)
    ========================================================================== */
 
 .clients-ticker-wrap {
-  padding: 3.5rem 0;
+  padding: 2.25rem 0;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
   background: var(--bg-secondary);
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
-.clients-grid {
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: smoothMarquee 30s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-group {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  flex-wrap: wrap;
+  gap: 3.5rem;
+  padding-right: 3.5rem;
+  flex-shrink: 0;
 }
 
 .client-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--text-muted);
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+  transition: color 0.25s ease, transform 0.25s ease;
   cursor: pointer;
+  user-select: none;
 }
 
 .client-brand:hover {
-  color: var(--text-primary);
+  color: var(--accent-color);
   transform: scale(1.05);
 }
 
 .client-brand svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   fill: currentColor;
+  flex-shrink: 0;
+  color: var(--accent-color);
+  opacity: 0.85;
 }
 
-@media (max-width: 768px) {
-  .clients-grid {
-    justify-content: center;
-    gap: 2rem;
+@keyframes smoothMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
@@ -1509,6 +1643,20 @@ textarea.form-control {
   justify-content: center;
   color: var(--accent-color);
   flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.contact-info-icon.whatsapp-icon {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+  color: #25D366;
+}
+
+.contact-info-card:hover .contact-info-icon.whatsapp-icon {
+  background: #25D366;
+  border-color: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 
 .contact-info-icon svg {
@@ -1816,6 +1964,84 @@ dialog::backdrop {
   transform: translateY(-1px) scale(0.94);
 }
 
+/* Floating WhatsApp Quick Connect Button */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 86px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  background: #20ba59;
+  box-shadow: 0 10px 26px rgba(37, 211, 102, 0.55);
+  color: #ffffff;
+}
+
+.floating-whatsapp-btn:active {
+  transform: scale(0.95);
+}
+
+.floating-whatsapp-btn .whatsapp-tooltip {
+  position: absolute;
+  right: 60px;
+  white-space: nowrap;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.floating-whatsapp-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.floating-whatsapp-btn .whatsapp-ping {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  opacity: 0.7;
+  animation: whatsappPulse 2.4s infinite;
+  pointer-events: none;
+}
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
 /* ==========================================================================
    CUSTOM BLUE ARROW CURSOR POINTER SYSTEM (MATCHING SOWROV'S SPEC)
    ========================================================================== */
@@ -1887,15 +2113,15 @@ input, textarea, select {
 
   /* Project Card Hover: sleek magnetic "VIEW" pill badge */
   .cursor-card-badge {
-    background: #3273f6;
-    color: #ffffff;
+    background: var(--accent-color);
+    color: #0a0a0b;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     padding: 4px 10px;
     border-radius: 999px;
-    box-shadow: 0 4px 16px rgba(50, 115, 246, 0.5);
+    box-shadow: 0 4px 16px var(--accent-glow);
     opacity: 0;
     transform: translateX(-8px) scale(0.7);
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1919,4 +2145,397 @@ input, textarea, select {
   .custom-cursor-arrow {
     display: none !important;
   }
+}
+
+/* ==========================================================================
+   CULINARY & 5-STAR HOSPITALITY ELEVATION SYSTEM
+   ========================================================================== */
+
+/* Experience Timeline */
+.culinary-timeline {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.culinary-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 28px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-color) 0%, rgba(212, 175, 55, 0.1) 100%);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 70px;
+  margin-bottom: 2.75rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 17px;
+  top: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-glow);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-marker::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.timeline-content-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.timeline-content-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-header-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-role-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.timeline-badge-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-glow);
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.timeline-date-range {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.timeline-org-name {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timeline-org-name svg {
+  color: var(--accent-color);
+}
+
+.timeline-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.spec-chip {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.timeline-duties-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.65rem 1.25rem;
+}
+
+.timeline-duties-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.timeline-duties-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+}
+
+/* Qualifications & Certifications Grid */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.cert-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.cert-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.cert-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--accent-glow);
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-color);
+}
+
+.cert-level-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.cert-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.cert-issuer {
+  font-size: 0.92rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.cert-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: auto;
+}
+
+/* Culinary References & Endorsements */
+.references-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.reference-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  position: relative;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.reference-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+}
+
+.ref-quote {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.ref-author-box {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.25rem;
+}
+
+.ref-avatar-initials {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), #8a6d1c);
+  color: #0a0a0b;
+  font-weight: 800;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.ref-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.ref-role-hotel {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.ref-contacts {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.ref-contact-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.ref-contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Chef Specialty Badges in Portfolio */
+.dish-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.dish-meta-chip {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+}
+
+.dish-meta-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.dish-meta-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Chef CV Download Bar */
+.chef-cv-banner {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(22, 22, 26, 0.8) 100%);
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.chef-cv-banner h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.chef-cv-banner p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 600px;
+}
+
 }

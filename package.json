@@ -1,0 +1,25 @@
+{
+  "name": "chef-imran-hasan-bijoy-portfolio",
+  "version": "1.0.0",
+  "description": "Culinary Portfolio of Chef Md. Imran Hasan Bijoy — Demi Chef de Partie & Multi-Cuisine Specialist",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs"
+  },
+  "keywords": [
+    "chef",
+    "culinary",
+    "hospitality",
+    "portfolio",
+    "demi-chef-de-partie",
+    "radisson-blu",
+    "bhawal-resort",
+    "sushi",
+    "continental",
+    "tandoor"
+  ],
+  "author": "Md. Imran Hasan Bijoy",
+  "license": "ISC"
+}
+

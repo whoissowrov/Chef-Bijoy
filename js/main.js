@@ -138,67 +138,87 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTools = document.getElementById('modalTools');
   const modalDescription = document.getElementById('modalDescription');
 
-  // Project details dataset
+  // Culinary dishes dataset
   const projectsData = {
-    'webapp': {
-      title: 'CloudFlow — Enterprise Analytics SaaS Platform',
-      category: 'Web Application & Full-Stack Development',
-      img: 'images/project_mobile_ui.jpg',
-      client: 'CloudFlow Technologies Inc.',
-      year: '2026',
-      role: 'Lead Web Application Developer',
-      tools: 'React, Node.js, PostgreSQL, Tailwind, REST APIs',
-      description: 'Architected and built a mission-critical SaaS analytics web application serving 45,000+ daily active users. Features real-time websocket data feeds, role-based access control, custom charting dashboards, and sub-100ms API response latency.'
+    'sushi': {
+      title: 'Artisan Nigiri & Maki Sushi Selection',
+      category: 'Sushi & Japanese Delicacies',
+      img: 'images/culinary_sushi.jpg',
+      client: 'Bhawal Resort & Spa / Radisson Blu',
+      year: '2024 – 2026',
+      role: 'Station Lead & Sushi Specialist',
+      tools: 'Japanese Knives, Fresh Sashimi, Wasabi, Seasoned Sushi Rice',
+      description: 'Handcrafted premium sushi presentation. Precision-cut fresh salmon, tuna, cucumber and avocado maki, prepared with traditional Japanese vinegar seasoning and artistic bento/platter presentation for 5-star resort guests.'
     },
-    'ecommerce': {
-      title: 'Veloce Footwear — High-Conversion E-Commerce Platform',
-      category: 'Web Development & Conversion Funnel',
-      img: 'images/project_sneaker.jpg',
-      client: 'Veloce Athletics UK',
-      year: '2026',
-      role: 'Full-Stack Web Developer & CRO Specialist',
-      tools: 'Next.js, Headless Shopify, Stripe API, Core Web Vitals 99+',
-      description: 'Engineered a headless e-commerce web platform engineered for extreme speed and conversion. Reduced average page load time from 4.8s to 0.7s, resulting in an immediate 180% surge in completed checkouts and $1.2M in quarterly online revenue.'
+    'continental': {
+      title: 'Herb-Crusted Beef Tenderloin & Pan-Seared Salmon',
+      category: 'Continental & A La Carte Fine Dining',
+      img: 'images/culinary_continental.jpg',
+      client: 'Radisson Blu Water Garden & Bhawal Resort',
+      year: '2021 – 2026',
+      role: 'Demi Chef de Partie (DCDP)',
+      tools: 'Sous-Vide, Cast Iron Sear, Sauce Reductions, Microgreens',
+      description: 'Exquisite 5-star Continental A La Carte presentation. Herb-infused beef tenderloin and crisp-skin salmon served with truffle potato purée, glazed baby carrots, and rich red wine jus reduction.'
     },
-    'ads': {
-      title: 'Aeterna Horology — 4.5x ROAS Multi-Channel Paid Ads',
-      category: 'Digital Marketing & Paid Ads (Meta & Google)',
-      img: 'images/project_watch.jpg',
-      client: 'Aeterna Watchmakers Geneva',
-      year: '2025',
-      role: 'Senior Digital Marketing Strategist',
-      tools: 'Meta Ads Manager, Google Ads, GA4, Looker Studio',
-      description: 'Planned and managed a $280k advertising budget across Meta and Google Search. Designed custom high-intent sales landing pages and video ad creatives that slashed customer acquisition cost (CAC) by 42% while generating a verified 4.5x return on ad spend (ROAS).'
+    'kabab': {
+      title: 'Royal Dum Pukht Seekh Kabab & Garlic Naan',
+      category: 'Indian, Tandoor & Mughlai Specialties',
+      img: 'images/culinary_kabab_naan.jpg',
+      client: 'Specialty Tandoor Kitchen',
+      year: '2023 – 2026',
+      role: 'Kabab & Naan Craftsman',
+      tools: 'Traditional Clay Tandoor, Skewers, Aromatic Spices, Ghee',
+      description: 'Authentic clay tandoor cooking. Tender spiced minced meat kababs, slow-marinated in traditional spices, skewered and charred to perfection. Paired with blistered garlic coriander butter naan made to order.'
     },
-    'social': {
-      title: 'Aurora Clean Beauty — Viral Social Media Growth',
-      category: 'Social Media Management & Community Strategy',
-      img: 'images/project_packaging.jpg',
-      client: 'Aurora Clean Beauty Co.',
-      year: '2025',
-      role: 'Head of Social Media & Content Strategy',
-      tools: 'CapCut, Meta Business Suite, TikTok Creator, Canva Pro',
-      description: 'Spearheaded organic social media transformation from 12k to over 850k followers across Instagram and TikTok within 7 months. Produced viral short-form video reels that generated 14M organic views and established Aurora as a top trending clean beauty brand.'
+    'dumplings': {
+      title: 'Handcrafted Steamed Asian Dim Sum & Dumplings',
+      category: 'Asian & Oriental Specialties',
+      img: 'images/culinary_dumplings.jpg',
+      client: 'Bhawal Resort & Spa',
+      year: '2024 – 2026',
+      role: 'Dim Sum & Asian Station Cook',
+      tools: 'Bamboo Steamers, Hand-rolled Wrappers, Chili Crisp Oil',
+      description: 'Hand-folded artisanal Asian dumplings with translucent wrappers, filled with seasoned prawns, scallions, and water chestnuts. Served in layered bamboo steamers with chili dipping oils.'
     },
-    'portal': {
-      title: 'Apex Spatial — Cloud Customer Portal',
-      category: 'Web Application & Cloud Architecture',
-      img: 'images/project_architecture.jpg',
-      client: 'Apex Spatial Infrastructure',
-      year: '2025',
-      role: 'Full-Stack Web Developer',
-      tools: 'Vue.js / Nuxt, Python FastAPI, Docker, TailwindCSS',
-      description: 'Built an enterprise customer portal allowing commercial clients to visualize spatial assets, manage support tickets, and download automated compliance reports. Engineered zero-downtime deployment pipelines and hardened OAuth2 security.'
+    'baking': {
+      title: 'Artisan Viennoiserie, Breads & Gourmet Pastry',
+      category: 'NSDA Level 3 Certified Baking & Pastry',
+      img: 'images/culinary_baking_pastry.jpg',
+      client: 'Resort Bakery & NSDA Certification Center',
+      year: '2023 – 2026',
+      role: 'Certified Baker (NSDA Level 3)',
+      tools: 'Deck Oven, Proofer, Laminator, Artisan Fermentation',
+      description: 'Certified under Bangladesh National Skills Development Authority (Level 3 Baking). Mastery in laminated croissant dough, sourdough loaves, brioche, and fine dining dessert components.'
     },
-    'funnel': {
-      title: 'Elara Advisory — Omnichannel Lead Gen Funnel',
-      category: 'Digital Marketing & Social Media Strategy',
-      img: 'images/project_branding.jpg',
-      client: 'Elara Private Advisory London',
-      year: '2025',
-      role: 'Growth Marketing & Social Media Lead',
-      tools: 'HubSpot, LinkedIn Ads, Automated Email Sequences, SEO',
-      description: 'Designed an omnichannel high-net-worth lead generation machine combining thought leadership content on LinkedIn with automated email nurturing funnels, yielding 340+ verified qualified investor leads in under six months.'
+    'buffet': {
+      title: 'Grand 5-Star Resort Banquet & Buffet Spread',
+      category: 'High-Volume Catering & Live Stations',
+      img: 'images/culinary_buffet_banquet.jpg',
+      client: 'Radisson Blu Dhaka & Bhawal Resort',
+      year: '2021 – 2026',
+      role: 'Buffet & Banquet Production Specialist',
+      tools: 'Chafing Units, Live Carving Station, Salad Display',
+      description: 'Coordinated multi-course breakfast, lunch, and dinner buffet spreads catering to 400–800 guests daily. Coordinated hot line replenishment, allergen safety checks, and aesthetic presentation.'
+    },
+    'salad': {
+      title: 'Gourmet Appetizer & Dietary-Restricted Salad',
+      category: 'Vegan, Gluten-Free & Allergen-Safe Dining',
+      img: 'images/culinary_salad_appetizer.jpg',
+      client: 'Five-Star Wellness Dining',
+      year: '2024 – 2026',
+      role: 'Garde Manger & Dietary Menu Specialist',
+      tools: 'Farm-Fresh Greens, House Emulsions, Edible Flowers',
+      description: 'Specialized dishes engineered for guests with gluten intolerances, vegan preferences, and strict dietary guidelines without compromising on visual sophistication or gourmet flavor.'
+    },
+    'livekitchen': {
+      title: 'Live Wok & Interactive Sauté Station',
+      category: 'Live Station Cooking & Guest Engagement',
+      img: 'images/culinary_kitchen_action.jpg',
+      client: 'Bhawal Resort & Spa',
+      year: '2025 – 2026',
+      role: 'Demi Chef de Partie (DCDP)',
+      tools: 'High-Heat Wok, Flambé Station, Guest Interaction',
+      description: 'Dynamic live interactive culinary showmanship for resort guests. Fast wok tosses, searing, and custom ingredient selections prepared fresh in front of dining patrons.'
     }
   };
 
@@ -382,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
         contactForm.reset();
-        showToast('Thank you! Your message has been sent successfully. I will be in touch shortly.');
+        showToast('Thank you! Your culinary inquiry has been received. Chef Bijoy will get in touch with you shortly.');
       }, 1200);
     });
   }
